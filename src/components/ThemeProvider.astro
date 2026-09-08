@@ -10,7 +10,9 @@
 	function updateThemeColorMeta(theme) {
 		const meta = document.querySelector('meta[name="theme-color"]');
 		if (meta) {
-			meta.setAttribute("content", theme === "dark" ? "#1d1f21" : "#fbfbfb");
+			setTimeout(() => {
+				meta.setAttribute("content", theme === "dark" ? "#1d1f21" : "#fbfbfb");
+			}, 300); // matches --color-mode-transition-duration
 		}
 	}
 
