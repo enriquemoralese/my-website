@@ -7,16 +7,22 @@
 		return storedTheme || (lightModePref.matches ? "light" : "dark");
 	}
 
-	function updateThemeColorMeta(theme) {
+	function updateThemeColorMeta(theme, immediate = false) {
 		const meta = document.querySelector('meta[name="theme-color"]');
-		if (meta) {
-			setTimeout(() => {
-				meta.setAttribute("content", theme === "dark" ? "#1d1f21" : "#fbfbfb");
-			}, 300); // matches --color-mode-transition-duration
+		if (!meta) return;
+
+		const apply = () => {
+			meta.setAttribute("content", theme === "dark" ? "#1d1f21" : "#fbfbfb");
+		};
+
+		if (immediate) {
+			apply();
+		} else {
+			setTimeout(apply, 300); // matches --color-mode-transition-duration
 		}
 	}
 
-	function setTheme(newTheme) {
+	function setTheme(newTheme, isInitial = false) {
 		if (newTheme !== "light" && newTheme !== "dark") {
 			return console.warn(
 				`Invalid theme value '${newTheme}' received. Expected 'light' or 'dark'.`,
@@ -25,7 +31,7 @@
 
 		const root = document.documentElement;
 
-		updateThemeColorMeta(newTheme);
+		updateThemeColorMeta(newTheme, isInitial);
 
 		// root already set to newTheme, exit early
 		if (newTheme === root.getAttribute("data-theme")) {
@@ -40,12 +46,12 @@
 	}
 
 	// initial setup
-	setTheme(getUserPref());
+	setTheme(getUserPref(), true);
 
 	// listen for pageshow event, browser restored page from bfcache
 	window.addEventListener("pageshow", (e) => {
 		if (e.persisted) {
-			setTheme(getUserPref());
+			setTheme(getUserPref(), true);
 		}
 	});
 
