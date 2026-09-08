@@ -7,6 +7,13 @@
 		return storedTheme || (lightModePref.matches ? "light" : "dark");
 	}
 
+	function updateThemeColorMeta(theme) {
+		const meta = document.querySelector('meta[name="theme-color"]');
+		if (meta) {
+			meta.setAttribute("content", theme === "dark" ? "#1d1f21" : "#fbfbfb");
+		}
+	}
+
 	function setTheme(newTheme) {
 		if (newTheme !== "light" && newTheme !== "dark") {
 			return console.warn(
@@ -15,6 +22,8 @@
 		}
 
 		const root = document.documentElement;
+
+		updateThemeColorMeta(newTheme);
 
 		// root already set to newTheme, exit early
 		if (newTheme === root.getAttribute("data-theme")) {
