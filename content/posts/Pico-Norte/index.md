@@ -18,6 +18,6 @@ pinned: false
 <div class="relative left-[73%] w-screen -translate-x-1/2">
 	<div class="max-w-4xl mx-auto text-center px-4 leading-relaxed [&_p]:text-center">
 
-Pico Sur visto desde la cumbre del Pico Norte en el Monumento Natural Cerro de la Silla.
+Pico Sur visto desde la cumbre del Pico Norte en el Monumento Natural Cerro de la Silla. yaml
 
 </div>
