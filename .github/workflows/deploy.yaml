@@ -1,0 +1,48 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: us-east-1
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Deploy assets
+        run: |
+          aws s3 sync dist/_astro s3://enriquemorales-cloud-site/_astro \
+            --cache-control "public,max-age=31536000,immutable"
+
+      - name: Deploy HTML
+        run: |
+          aws s3 sync dist s3://enriquemorales-cloud-site --delete \
+            --cache-control "no-cache,no-store,must-revalidate"
+
+      - name: Invalidate cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id E3O9EC3PT40J3T \
+            --paths "/*"
