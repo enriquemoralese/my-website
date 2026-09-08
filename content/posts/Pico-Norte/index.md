@@ -1,6 +1,6 @@
 ---
 title: "Pico Norte"
-description: "This post is for testing and listing a number of different markdown elements"
+description: ""
 publishDate: "07 Sep 2026"
 tags: []
 pinned: false
