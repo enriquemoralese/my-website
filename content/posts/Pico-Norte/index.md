@@ -9,10 +9,10 @@ pinned: false
 
 <section class="relative left-1/2 w-screen -translate-x-1/2">
 	<img
-		src="/plug.jpg"
-		alt="pluh"
-		class="block max-w-4xl w-full h-auto ml-auto mr-[10%]"
-	/>
+	src="/plug.jpg"
+	alt="pluh"
+	class="block max-w-4xl w-full h-auto mx-auto px-4 lg:px-0 lg:ml-auto lg:mr-[10%]"
+/>
 </section>
 
 <div class="relative left-[73%] w-screen -translate-x-1/2">
