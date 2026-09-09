@@ -8,5 +8,8 @@ coverImage:
   src: "./plug.jpg"
   alt: "Pico Sur visto desde la cumbre del Pico Norte"
 ---
+<img src="/plug.jpg" alt="Pico Sur visto desde la cumbre del Pico Norte" class="w-full h-auto mx-auto" />
 
-Pico Sur visto desde la cumbre del Pico Norte en el Monumento Natural Cerro de la Silla.
+<p class="text-center leading-relaxed mt-10">
+	Pico Sur visto desde la cumbre del Pico Norte en el Monumento Natural Cerro de la Silla.
+</p>
