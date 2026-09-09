@@ -9,7 +9,7 @@ pinned: false
 <img
 	src="/plug.jpg"
 	alt="Pico Sur visto desde la cumbre del Pico Norte"
-	class="w-full h-[60vh] object-cover mx-auto"
+	class="w-full max-w-none h-[60vh] object-cover mx-auto"
 />
 
 <p class="text-center leading-relaxed">
