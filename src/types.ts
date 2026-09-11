@@ -23,6 +23,9 @@ export interface SiteMeta {
 	ogImage?: string | undefined;
 	title: string;
 }
+	ogImage?: string | undefined;
+	title: string;
+}
 
 /** Webmentions */
 export interface WebmentionsFeed {
