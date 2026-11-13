@@ -37,6 +37,25 @@ jobs:
       - run: npm ci
       - run: npm run build
 
+      - name: Check what the deploy would delete
+        env:
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+        run: |
+          aws s3 sync dist s3://enriquemorales-cloud-site --delete --dryrun > plan.txt
+          deleted=$(grep '^(dryrun) delete:' plan.txt \
+            | sed 's#^(dryrun) delete: s3://enriquemorales-cloud-site/##' \
+            | grep -vE '^(_astro|pagefind)/' || true)
+          if [ -n "$deleted" ]; then
+            echo "This deploy would delete from the live site:"
+            echo "$deleted"
+            if printf '%s' "$COMMIT_MESSAGE" | grep -qF '[permitir-borrado]'; then
+              echo "Commit message has [permitir-borrado]; continuing."
+            else
+              echo "::error::The deploy would delete live files that are not build output. If intended, add [permitir-borrado] to the commit message."
+              exit 1
+            fi
+          fi
+
       - name: Deploy assets
         run: |
           aws s3 sync dist/_astro s3://enriquemorales-cloud-site/_astro \
