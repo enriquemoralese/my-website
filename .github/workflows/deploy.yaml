@@ -16,7 +16,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Debug OIDC token
         run: |
@@ -24,12 +24,12 @@ jobs:
             "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=sts.amazonaws.com" \
             | jq -r '.value' | cut -d. -f2 | base64 -d 2>/dev/null | jq .
 
-      - uses: aws-actions/configure-aws-credentials@v4
+      - uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: us-east-1
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: 'npm'
