@@ -1,4 +1,5 @@
 ---
+import { Icon } from "astro-icon/components";
 import { menuLinks } from "@/site.config";
 const year = new Date().getFullYear();
 ---
@@ -6,8 +7,26 @@ const year = new Date().getFullYear();
 <footer
 	class="text-muted mt-auto flex w-full flex-col items-center justify-center gap-y-2 pt-20 pb-4 text-center align-top font-semibold sm:flex-row sm:justify-between sm:text-xs"
 >
-	<div class="me-0 sm:me-4">
-		&copy; Enrique Morales {year}.
+	<div class="me-0 flex items-center gap-x-3 sm:me-4">
+		<span>&copy; Enrique Morales {year}.</span>
+		<a
+			class="hover:text-global-text inline-flex"
+			href="https://github.com/enriquemoralese"
+			rel="noreferrer"
+			target="_blank"
+		>
+			<Icon aria-hidden="true" class="h-5 w-5" focusable="false" name="mdi:github" />
+			<span class="sr-only">GitHub</span>
+		</a>
+		<a
+			class="hover:text-global-text inline-flex"
+			href="https://www.linkedin.com/in/enrique-morales-estrada/"
+			rel="noreferrer"
+			target="_blank"
+		>
+			<Icon aria-hidden="true" class="h-5 w-5" focusable="false" name="mdi:linkedin" />
+			<span class="sr-only">LinkedIn</span>
+		</a>
 	</div>
 	<nav aria-label="Footer" class="flex gap-x-2 sm:gap-x-4">
 		{
